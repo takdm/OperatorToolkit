@@ -1,23 +1,8 @@
-#!/usr/bin/env python3
-
-"""
-TrimCalc - Calculate trim size and trim weight for material rolls.
-
-Usage:
-    python3 main.py
-
-Follow the prompts to enter:
-    - MR Size (inches)
-    - Slit roll size (mm)
-    - Number of slits
-    - Label roll weight
-"""
-
 def mm_to_inches(mm):
     """Convert millimeters to inches."""
     return mm / 25.4
 
-def main():
+def TrimCalc():
     print("=== TrimCalc: Material Roll Calculator ===")
     try:
         mr_size = float(input("Enter MR Size (inches): "))
@@ -35,6 +20,50 @@ def main():
 
     print(f"\nTrim Size: {trim_size:.2f} inches")
     print(f"Trim Weight: {trim_weight:.2f}")
-    input()
+
+def PartCalc():
+    # Prompt user for the full roll footage (in feet)
+    print("Enter full roll footage:")
+    fullfeet = int(input())
+
+    # Prompt user for the full roll weight
+    print("Enter full roll weight:")
+    fullweight = int(input())
+
+    # Prompt user for the partial roll footage (rounded, in feet)
+    print("Enter partial footage (rounded):")
+    partfootage = int(input())
+
+    # Prompt user for the number of lanes
+    print("Enter amount of lanes:")
+    lanes = int(input())
+
+    # Calculate the weight of the partial roll
+    partialweight = fullweight / fullfeet * partfootage
+
+    # Output the results
+    print("Your per roll partial weight is", partialweight)
+    print("Your partials total at", lanes * partialweight)
+
+def main_menu():
+    while True:
+        print("\n=== Main Menu ===")
+        print("1. Go to PartCalc")
+        print("2. Go To TrimCalc")
+        print("3. Exit")
+        choice = input("Select an option: ")
+
+        if choice == "1":
+            PartCalc()
+        elif choice == "2":
+            TrimCalc()
+        elif choice == "3":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+# Call the main function to execute the script
 if __name__ == "__main__":
-    main()
+    main_menu()
