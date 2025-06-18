@@ -50,9 +50,9 @@ def PartCalc():
     # Calculate the weight of the partial roll
     partialweight = fullweight / fullfeet * partfootage
 
-    # Output the results
-    print("Your per roll partial weight is", partialweight)
-    print("Your partials total at", lanes * partialweight)
+    # Output the results with floats to 2 decimal places
+    print("Your per roll partial weight is {:.2f}".format(partialweight))
+    print("Your partials total at {:.2f}".format(lanes * partialweight))
 
 def main_menu():
     """
