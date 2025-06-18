@@ -17,9 +17,8 @@ A simple toolkit with calculation utilities for operators.
 2. Run OpToolKit.exe
 
 ### Others
-(requires python)
-0. Download and Extract source code
-1. Run the program:
+0. Download and Extract source code 
+1. Run the program(requires python):
    ```
    python OpToolKit.py
    ```
