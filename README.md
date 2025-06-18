@@ -17,8 +17,8 @@ A simple toolkit with calculation utilities for operators.
    python OpToolKit.py
    ```
 2. The main menu will appear with the following options:
-   - Select `1` to run Trimcalc.
-   - Select `2` to run PartCalc.
+   - Select `1` to run Trimcalc. (useful at the beginning of a setup for paperwork)
+   - Select `2` to run PartCalc. (useful during master roll changes)
    - Select `3` to exit the program.
 
 3. Follow the prompts for each calculation.
@@ -27,7 +27,3 @@ A simple toolkit with calculation utilities for operators.
 
 - `OpToolKit.py`: Main script containing all functions and the interactive menu.
 - `README.md`: Project documentation.
-
-## Extending
-
-You can add more calculation options to the main menu by editing the `main_menu` function
