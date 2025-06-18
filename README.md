@@ -1,28 +1,33 @@
 # OperatorToolkit
 
-A simple toolkit with calculation utilities.
+A simple toolkit with calculation utilities for operators.
 
 ## Features
 
-- **Trimcalc:** Performs a trim calculation.
-- **Partcalc:** Performs a part calculation, accessible from the main menu.
+- **Trimcalc:**  
+  Calculates trim size and trim weight based on user input for MR size, slit roll size (in mm), number of slits, and label roll weight.
+
+- **PartCalc:**  
+  Calculates partial roll weight and total partials based on user input for full roll footage, full roll weight, partial footage, and number of lanes.
 
 ## Usage
 
 1. Run the program:
    ```
-   python main.py
+   python OpToolKit.py
    ```
-2. The program will first run the Trimcalc function.
-3. After Trimcalc, a main menu will appear:
-   - Select `1` to run PartCalc.
-   - Select `2` to exit the program.
+2. The main menu will appear with the following options:
+   - Select `1` to run Trimcalc.
+   - Select `2` to run PartCalc.
+   - Select `3` to exit the program.
+
+3. Follow the prompts for each calculation.
 
 ## Structure
 
-- `main.py`: Main script containing all functions and the menu.
+- `OpToolKit.py`: Main script containing all functions and the interactive menu.
 - `README.md`: Project documentation.
 
 ## Extending
 
-You can add more options to the main menu by editing the `main_menu` function
+You can add more calculation options to the main menu by editing the `main_menu` function

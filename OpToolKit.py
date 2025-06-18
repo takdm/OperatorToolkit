@@ -57,17 +57,20 @@ def PartCalc():
 def main_menu():
     """
     Display the main menu and handle user input.
-    Allows the user to choose between running PartCalc or exiting.
+    Allows the user to choose between running Trimcalc, PartCalc, or exiting.
     """
     while True:
         print("\n=== Main Menu ===")
-        print("1. Go to PartCalc")
-        print("2. Exit")
+        print("1. Run Trimcalc")
+        print("2. Run PartCalc")
+        print("3. Exit")
         choice = input("Select an option: ")
 
         if choice == "1":
-            PartCalc()
+            Trimcalc()
         elif choice == "2":
+            PartCalc()
+        elif choice == "3":
             print("Exiting...")
             break
         else:
@@ -75,7 +78,5 @@ def main_menu():
 
 # Call the main function to execute the script
 if __name__ == "__main__":
-    # First, run the Trimcalc function
-    Trimcalc()
-    # Then, display the main menu
+    # Display the main menu
     main_menu()
