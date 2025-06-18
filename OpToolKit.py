@@ -2,8 +2,12 @@ def mm_to_inches(mm):
     """Convert millimeters to inches."""
     return mm / 25.4
 
-def TrimCalc():
-    print("=== TrimCalc: Material Roll Calculator ===")
+def Trimcalc():
+    """
+    Perform trim calculation.
+    This function simulates the trim calculation process.
+    """
+    print("Running Trimcalc...")
     try:
         mr_size = float(input("Enter MR Size (inches): "))
         slit_size_mm = float(input("Enter Slit Roll Size (mm): "))
@@ -22,6 +26,11 @@ def TrimCalc():
     print(f"Trim Weight: {trim_weight:.2f}")
 
 def PartCalc():
+    """
+    Perform part calculation.
+    This function simulates the part calculation process.
+    """
+    print("Running PartCalc...")
     # Prompt user for the full roll footage (in feet)
     print("Enter full roll footage:")
     fullfeet = int(input())
@@ -46,24 +55,27 @@ def PartCalc():
     print("Your partials total at", lanes * partialweight)
 
 def main_menu():
+    """
+    Display the main menu and handle user input.
+    Allows the user to choose between running PartCalc or exiting.
+    """
     while True:
         print("\n=== Main Menu ===")
         print("1. Go to PartCalc")
-        print("2. Go To TrimCalc")
-        print("3. Exit")
+        print("2. Exit")
         choice = input("Select an option: ")
 
         if choice == "1":
             PartCalc()
         elif choice == "2":
-            TrimCalc()
-        elif choice == "3":
             print("Exiting...")
             break
         else:
             print("Invalid choice. Please try again.")
 
-
 # Call the main function to execute the script
 if __name__ == "__main__":
+    # First, run the Trimcalc function
+    Trimcalc()
+    # Then, display the main menu
     main_menu()
