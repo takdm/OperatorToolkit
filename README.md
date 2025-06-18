@@ -12,6 +12,12 @@ A simple toolkit with calculation utilities for operators.
 
 ## Usage
 
+### Windows
+1. Download and extract release zip
+2. Run OpToolKit.exe
+
+### Others
+(requires python)
 1. Run the program:
    ```
    python OpToolKit.py
