@@ -8,8 +8,8 @@ def main_menu():
     """
     while True:
         print("\n=== Main Menu ===")
-        print("1. Run Trimcalc")
-        print("2. Run PartCalc")
+        print("1. Run setup calculator")
+        print("2. Run partial calculator")
         print("3. Exit")
         choice = input("Select an option: ")
 
