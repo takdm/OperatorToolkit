@@ -28,26 +28,24 @@ def Partcalc():
     print("Your per roll partial weight is {:.2f}".format(partialweight))
     print("Your partials total at {:.2f}".format(lanes * partialweight))
 
-    # Prompts user if theyd like a trim weight
-    print("Would you like a trim weight? y/n")
-    choice = input()
-    if choice == "y":
 
-        #Prompts user for trim weight
-        print("Enter full trim weight")
-        fulltrim = int(input())
+    #Prompts user for trim weight
+    print("Enter full trim weight")
+    fulltrim = int(input())
 
-        # Calculates the partial
-        partialtrim = fulltrim / fullfeet * partfootage
-        print("Your partial trim weight is {:.2f}".format(partialtrim))
-    else:
-        # math and display for remainders
-        reroll = fullweight - partialweight
-        print("Your remaining rolls weight is {:.2f}".format(reroll))
-        reset = reroll * lanes
-        print("your remianing set weighs{:.2f}".format(reset))
-        retrim = fulltrim - partialtrim
-        print("your remaining trim weighs{:.2f}".format(retrim))
+    # Calculates the partial
+    partialtrim = fulltrim / fullfeet * partfootage
+    print("Your partial trim weight is {:.2f}".format(partialtrim))
+
+    # math and display for remainders
+    reroll = fullweight - partialweight
+    print("Your remaining rolls weight is {:.2f}".format(reroll))
+    reset = reroll * lanes
+    print("your remianing set weight is {:.2f}".format(reset))
+    retrim = fulltrim - partialtrim
+    print("your remaining trim weight is {:.2f}".format(retrim))
+
+
 
     
     
