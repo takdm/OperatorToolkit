@@ -96,7 +96,3 @@ Your partials total at 100.00
 Pull requests and suggestions are welcome! Please open an issue to discuss changes or improvements.
 
 ---
-
-## License
-
-This project is open source. See [LICENSE](LICENSE) for details.
