@@ -20,6 +20,13 @@ OperatorToolkit is a simple, interactive toolkit designed to help operators perf
   - Partial footage (feet)
   - Number of lanes
 
+- **GUI Interface**  
+  User-friendly graphical interface with:
+  - Tabbed interface for easy navigation
+  - Input validation and error handling
+  - Clear results display
+  - Both GUI and console modes available
+
 ---
 
 ## Getting Started
@@ -37,7 +44,24 @@ OperatorToolkit is a simple, interactive toolkit designed to help operators perf
    ```
    python OpToolKit.py
    ```
-4. Follow the on-screen menu:
+4. Choose your preferred interface:
+   - **GUI Mode**: Select option 1 for a user-friendly graphical interface
+   - **Console Mode**: Select option 2 for traditional text-based interface
+
+   Alternatively, you can specify the interface directly:
+   ```
+   python OpToolKit.py --gui      # Launch GUI mode
+   python OpToolKit.py --console  # Launch console mode
+   ```
+
+#### GUI Mode
+- Navigate between calculators using tabs
+- Fill in input fields and click "Calculate" 
+- Results are displayed in the results section
+- Use "Clear" to reset all fields
+
+#### Console Mode  
+- Follow the on-screen menu:
    - `1` — Run Trimcalc (for setup calculations)
    - `2` — Run PartCalc (for partial roll calculations)
    - `3` — Exit
@@ -77,10 +101,11 @@ Your partials total at 100.00
 
 ## Project Structure
 
-- `OpToolKit.py` — Main entry point and menu
+- `OpToolKit.py` — Main entry point supporting both GUI and console modes
+- `gui.py` — GUI implementation using tkinter
 - `Trimcalc.py` — Trim calculation logic
 - `Partcalc.py` — Partial calculation logic
-- `Menu.py` — Menu system (if used separately)
+- `Menu.py` — Console menu system
 - `README.md` — Project documentation
 
 ---

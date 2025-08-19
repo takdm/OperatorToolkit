@@ -3,3 +3,6 @@ venv/
 build/
 dist/
 Menu.spec
+*.png
+*.jpg
+*.jpeg
