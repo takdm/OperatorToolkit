@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import Trimcalc
 import Partcalc
+import Footagecalc
 
 class OperatorToolkitGUI:
     def __init__(self, root):
@@ -24,6 +25,9 @@ class OperatorToolkitGUI:
         
         # Create Partcalc tab
         self.create_partcalc_tab()
+        
+        # Create Clearcalc tab
+        self.create_clearcalc_tab()
 
     def create_main_menu(self):
         """Create the main menu tab"""
@@ -52,6 +56,10 @@ class OperatorToolkitGUI:
         partcalc_btn = ttk.Button(buttons_frame, text="Partial Calculator (Partcalc)", 
                                  command=lambda: self.notebook.select(2), width=25)
         partcalc_btn.pack(pady=10)
+        
+        clear_btn = ttk.Button(buttons_frame, text="Clear Calculator", 
+                             command=lambda: self.notebook.select(3), width=25)
+        clear_btn.pack(pady=10)
 
     def create_trimcalc_tab(self):
         """Create the Trimcalc tab"""
@@ -230,6 +238,120 @@ class OperatorToolkitGUI:
         self.lanes_var.set("")
         self.full_trim_var.set("")
         self.part_results.delete(1.0, tk.END)
+
+    def create_clearcalc_tab(self):
+        """Create the Clearcalc tab"""
+        clear_frame = ttk.Frame(self.notebook)
+        self.notebook.add(clear_frame, text="Clear Calculator")
+        
+        # Title
+        title_label = ttk.Label(clear_frame, text="Clear Calculator", font=('Arial', 14, 'bold'))
+        title_label.pack(pady=10)
+        
+        # Input frame
+        input_frame = ttk.LabelFrame(clear_frame, text="Input Parameters", padding=10)
+        input_frame.pack(fill='x', padx=20, pady=10)
+        
+        # Diameter unit selection
+        ttk.Label(input_frame, text="Diameter Units:").grid(row=0, column=0, sticky='w', pady=5)
+        self.diameter_unit_var = tk.StringVar(value="Inches")
+        diameter_unit_combo = ttk.Combobox(input_frame, textvariable=self.diameter_unit_var, 
+                                           values=["Inches", "Millimeters"], state="readonly", width=18)
+        diameter_unit_combo.grid(row=0, column=1, pady=5, padx=10)
+        
+        # Roll Outer Diameter
+        ttk.Label(input_frame, text="Roll Outer Diameter:").grid(row=1, column=0, sticky='w', pady=5)
+        self.outer_diameter_var = tk.StringVar()
+        ttk.Entry(input_frame, textvariable=self.outer_diameter_var, width=20).grid(row=1, column=1, pady=5, padx=10)
+        
+        # Core Diameter
+        ttk.Label(input_frame, text="Core Diameter:").grid(row=2, column=0, sticky='w', pady=5)
+        self.core_diameter_var = tk.StringVar()
+        ttk.Entry(input_frame, textvariable=self.core_diameter_var, width=20).grid(row=2, column=1, pady=5, padx=10)
+        
+        # Material Thickness (mill only)
+        ttk.Label(input_frame, text="Material Thickness (mill):").grid(row=3, column=0, sticky='w', pady=5)
+        self.thickness_var = tk.StringVar()
+        ttk.Entry(input_frame, textvariable=self.thickness_var, width=20).grid(row=3, column=1, pady=5, padx=10)
+        
+        # Calculate button
+        calc_btn = ttk.Button(clear_frame, text="Calculate", command=self.calculate_clear, width=15)
+        calc_btn.pack(pady=10)
+        
+        # Results frame
+        results_frame = ttk.LabelFrame(clear_frame, text="Results", padding=10)
+        results_frame.pack(fill='x', padx=20, pady=10)
+        
+        self.clear_results = tk.Text(results_frame, height=10, width=50)
+        self.clear_results.pack(fill='x')
+        
+        # Clear button
+        clear_btn = ttk.Button(clear_frame, text="Clear", command=self.clear_clear, width=15)
+        clear_btn.pack(pady=5)
+
+    def calculate_clear(self):
+        """Calculate footage using the same logic as Clearcalc module"""
+        try:
+            # Get inputs
+            outer_diameter = float(self.outer_diameter_var.get())
+            core_diameter = float(self.core_diameter_var.get())
+            material_thickness_mill = float(self.thickness_var.get())
+            
+            # Validate inputs
+            if outer_diameter <= 0:
+                raise ValueError("Outer diameter must be positive")
+            if core_diameter <= 0:
+                raise ValueError("Core diameter must be positive")
+            if material_thickness_mill <= 0:
+                raise ValueError("Material thickness must be positive")
+            if core_diameter >= outer_diameter:
+                raise ValueError("Core diameter must be smaller than outer diameter")
+            
+            # Unit conversions
+            diameter_unit = self.diameter_unit_var.get()
+            
+            # Convert diameters to inches if needed
+            if diameter_unit == "Millimeters":
+                outer_diameter = Trimcalc.mm_to_inches(outer_diameter)
+                core_diameter = Trimcalc.mm_to_inches(core_diameter)
+            
+            # Convert thickness from mill to inches
+            material_thickness = material_thickness_mill / 1000
+            
+            # Calculate footage using spiral length formula
+            outer_radius = outer_diameter / 2
+            core_radius = core_diameter / 2
+            footage_inches = 3.14159 * (outer_radius**2 - core_radius**2) / material_thickness
+            footage_feet = footage_inches / 12
+            
+            # Display results
+            results = f"Roll outer diameter: {outer_diameter:.2f} inches\n"
+            results += f"Core diameter: {core_diameter:.2f} inches\n"
+            results += f"Material thickness: {material_thickness_mill:.1f} mill ({material_thickness:.4f} inches)\n"
+            results += f"\nCalculated Footage: {footage_feet:.2f} feet"
+            
+            # Show original units if converted
+            if diameter_unit == "Millimeters":
+                original_outer_mm = outer_diameter * 25.4
+                original_core_mm = core_diameter * 25.4
+                results += f"\n\nOriginal outer diameter: {original_outer_mm:.2f} mm"
+                results += f"\nOriginal core diameter: {original_core_mm:.2f} mm"
+            
+            self.clear_results.delete(1.0, tk.END)
+            self.clear_results.insert(1.0, results)
+            
+        except ValueError as e:
+            messagebox.showerror("Input Error", f"Invalid input: {str(e)}")
+        except Exception as e:
+            messagebox.showerror("Error", f"An error occurred: {str(e)}")
+
+    def clear_clear(self):
+        """Clear all Clearcalc inputs and results"""
+        self.outer_diameter_var.set("")
+        self.core_diameter_var.set("")
+        self.thickness_var.set("")
+        self.diameter_unit_var.set("Inches")
+        self.clear_results.delete(1.0, tk.END)
 
 
 def main():
