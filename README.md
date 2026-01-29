@@ -20,6 +20,13 @@ OperatorToolkit is a simple, interactive toolkit designed to help operators perf
   - Partial footage (feet)
   - Number of lanes
 
+- **Clearcalc**  
+  Calculate roll footage from diameter measurements using spiral length formula:
+  - Roll outer diameter (inches or mm)
+  - Core diameter (inches or mm) 
+  - Material thickness (mill/thousandths of inch)
+  - Outputs footage in feet and inches
+
 - **GUI Interface**  
   User-friendly graphical interface with:
   - Tabbed interface for easy navigation
@@ -64,7 +71,8 @@ OperatorToolkit is a simple, interactive toolkit designed to help operators perf
 - Follow the on-screen menu:
    - `1` — Run Trimcalc (for setup calculations)
    - `2` — Run PartCalc (for partial roll calculations)
-   - `3` — Exit
+   - `3` — Run Clearcalc (for footage calculations)
+   - `4` — Exit
 
 ---
 
@@ -94,7 +102,23 @@ Enter amount of lanes:
 
 Your per roll partial weight is 50.00
 Your partials total at 100.00
-...
+```
+
+**Clearcalc Example:**
+```
+Select units for diameters:
+1. Inches
+2. Millimeters
+Select option (1 or 2): 1
+Enter roll outer diameter (inches): 40
+Enter core diameter (inches): 6
+Enter material thickness (mill): 2.5
+
+=== Results ===
+Roll outer diameter: 40.00 inches
+Core diameter: 6.00 inches
+Material thickness: 2.5 mill (0.0025 inches)
+Calculated Footage: 471.24 feet
 ```
 
 ---
@@ -105,6 +129,7 @@ Your partials total at 100.00
 - `gui.py` — GUI implementation using tkinter
 - `Trimcalc.py` — Trim calculation logic
 - `Partcalc.py` — Partial calculation logic
+- `Footagecalc.py` — Footage/clear calculation logic using spiral length formula
 - `Menu.py` — Console menu system
 - `README.md` — Project documentation
 
@@ -113,6 +138,27 @@ Your partials total at 100.00
 ## Requirements
 
 - Python 3.x
+- tkinter (usually included with Python, but may need installation on some Linux systems)
+
+### Installing tkinter on Linux
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install python3-tk
+```
+
+**Fedora/CentOS/RHEL:**
+```bash
+sudo dnf install python3-tkinter
+# or for older systems:
+sudo yum install python3-tkinter
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S tk
+```
 
 ---
 
